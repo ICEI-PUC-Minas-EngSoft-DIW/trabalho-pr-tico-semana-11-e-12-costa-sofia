@@ -1,149 +1,108 @@
-const gallery = [ 
-    {
-      id: 2,
-      titulo: "Grafite Político",
-      descricao: "Desenho de grafite com temática política.",
-      conteudo: "Ilustração detalhada de graffiti político, mostrando arte urbana engajada.",
-      categoria: "Arte de Rua",
-      autor: "Leonardo AI",
-      data: "2025-03-30",
-      imagem: "https://cdn.leonardo.ai/users/62103611-9796-4122-8589-b5731d68e6bd/generations/eabb72be-a801-4378-a78e-5202b6ac5d51/Ilustration_V2_political_graffiti_drawing_0.jpg",
-      price: 200.00
-    },
-    {
-      id: 3,
-      titulo: "Paisagem do Rio de Janeiro",
-      descricao: "Imagem mostrando a beleza natural da cidade do Rio de Janeiro.",
-      conteudo: "Fotografia de paisagem urbana e natureza integrada em harmonia.",
-      categoria: "Paisagem Urbana",
-      autor: "Pixabay",
-      data: "2025-03-30",
-      imagem: "https://cdn.pixabay.com/photo/2018/07/20/01/42/rio-de-janeiro-3549798_1280.jpg",
-      price: 180.00
-    },
-    {
-      id: 4,
-      titulo: "Grafite Indiano",
-      descricao: "Arte urbana inspirada na cultura indiana.",
-      conteudo: "Ilustração detalhada de graffiti com elementos culturais da Índia.",
-      categoria: "Arte de Rua",
-      autor: "Leonardo AI",
-      data: "2025-03-30",
-      imagem: "https://cdn.leonardo.ai/users/62103611-9796-4122-8589-b5731d68e6bd/generations/f5906da8-87e4-451f-a69d-128fc2704212/Ilustration_V2_indian_graffiti_0.jpg",
-      price: 220.00
-    },
-    {
-      id: 5,
-      titulo: "Grafite em Cidade Urbana",
-      descricao: "Arte urbana detalhando grafites nas paredes da cidade.",
-      conteudo: "Ilustração mostrando a combinação de cores e formas de graffiti urbano.",
-      categoria: "Arte de Rua",
-      autor: "Leonardo AI",
-      data: "2025-03-30",
-      imagem: "https://cdn.leonardo.ai/users/62103611-9796-4122-8589-b5731d68e6bd/generations/eb233b7e-c529-4ea9-aa6d-27ae9d16eca7/Ilustration_V2_city_graffiti_0.jpg",
-      price: 210.00
-    },
-    {
-      id: 6,
-      titulo: "Grafite Festivo",
-      descricao: "Grafite colorido com temática festiva e alegre.",
-      conteudo: "Fotografia mostrando cores vibrantes em mural urbano.",
-      categoria: "Arte de Rua",
-      autor: "Pixabay",
-      data: "2025-03-30",
-      imagem: "https://cdn.pixabay.com/photo/2019/12/25/19/57/grafitti-4719165_1280.jpg",
-      price: 190.00
-    },
-    {
-      id: 7,
-      titulo: "Grafite McDonald's",
-      descricao: "Arte urbana retratando marca famosa em estilo grafite.",
-      conteudo: "Fotografia urbana mostrando publicidade e arte de rua combinadas.",
-      categoria: "Arte de Rua",
-      autor: "Pixabay",
-      data: "2025-03-30",
-      imagem: "https://cdn.pixabay.com/photo/2017/04/13/14/15/mcdonalds-2227657_1280.jpg",
-      price: 170.00
-    },
-    {
-      id: 8,
-      titulo: "Grafite Político Pintado",
-      descricao: "Obra de grafite política com cores vibrantes e formas impactantes.",
-      conteudo: "Ilustração de graffiti político mostrando a força da mensagem urbana.",
-      categoria: "Arte de Rua",
-      autor: "Leonardo AI",
-      data: "2025-03-30",
-      imagem: "https://cdn.leonardo.ai/users/62103611-9796-4122-8589-b5731d68e6bd/generations/cb3254d5-5e90-4b27-95b4-344936b6913e/Ilustration_V2_political_graffiti_painting_0.jpg",
-      price: 230.00
-    },
-    {
-      id: 9,
-      titulo: "História do Grafite",
-      descricao: "Fotografia histórica de grafite representando diversas eras da arte urbana.",
-      conteudo: "Imagem de grafite mostrando evolução da arte de rua.",
-      categoria: "Arte de Rua",
-      autor: "Leonardo AI",
-      data: "2025-03-30",
-      imagem: "https://cdn.leonardo.ai/users/62103611-9796-4122-8589-b5731d68e6bd/generations/3bab1f5b-ad39-452e-ab04-bc6dafc2c9b9/Absolute_Reality_v16_photograph_history_graffiti_0.jpg",
-      price: 240.00
-    },
-    {
-      id: 10,
-      titulo: "Grafite Contemporâneo",
-      descricao: "Arte urbana contemporânea em mural público.",
-      conteudo: "Fotografia mostrando detalhes e cores de grafite moderno.",
-      categoria: "Arte de Rua",
-      autor: "Pixabay",
-      data: "2025-03-30",
-      imagem: "https://cdn.pixabay.com/photo/2018/05/22/00/43/graffiti-3420171_1280.jpg",
-      price: 200.00
-    }
-  ];
-  
-const carouselContainer = document.querySelector('#carouselExampleAutoplaying .carousel-inner');
-if(carouselContainer){
-  gallery.forEach((item, index) => {
-    const activeClass = index === 0 ? 'active' : '';
-    const carouselItem = `
-      <div class="carousel-item detalhescarousel ${activeClass}">
-        <a href="detalhes.html?id=${item.id}">
-          <img src="${item.imagem}" class="d-block w-100" alt="${item.titulo}" style="height:80vh; object-fit:cover;">
-        </a>
-      </div>
-    `;
-    carouselContainer.insertAdjacentHTML('beforeend', carouselItem);
-  });
+const API_BASE = 'http://localhost:3000';
+const ENTITY = 'gallery';
+const ENDPOINT = `${API_BASE}/${ENTITY}`;
+
+async function apiGetAll() {
+  const res = await fetch(ENDPOINT);
+  if (!res.ok) throw new Error('Falha ao buscar dados');
+  return res.json();
 }
 
-const cardsContainer = document.getElementById('cards-container');
-if(cardsContainer){
-  gallery.forEach(item => {
-    const card = `
-      <div class="col-md-4 mb-4">
-        <a href="detalhes.html?id=${item.id}" class="text-decoration-none">
-          <div class="card h-500 bg-transparent border-light text-white">
-            <img src="${item.imagem}" class="card-img-top" alt="${item.titulo}" style="object-fit: cover; height:500px;">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title itenstitle">${item.titulo}</h5>
-              <p class="card-text">${item.descricao}</p>
-              <p class="mt-auto fw-bold">R$ ${item.price.toFixed(2)}</p>
-            </div>
+async function apiGetById(id) {
+  const res = await fetch(`${ENDPOINT}/${id}`);
+  if (!res.ok) throw new Error('Item não encontrado');
+  return res.json();
+}
+
+async function apiCreate(item) {
+  const res = await fetch(ENDPOINT, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(item)
+  });
+  if (!res.ok) throw new Error('Falha ao criar item');
+  return res.json();
+}
+
+async function apiUpdate(id, item) {
+  const res = await fetch(`${ENDPOINT}/${id}`, {
+    method: 'PUT',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(item)
+  });
+  if (!res.ok) throw new Error('Falha ao atualizar item');
+  return res.json();
+}
+
+async function apiDelete(id) {
+  const res = await fetch(`${ENDPOINT}/${id}`, { method: 'DELETE' });
+  if (!res.ok) throw new Error('Falha ao deletar item');
+  return true;
+}
+
+async function renderHome() {
+  const carouselContainer = document.querySelector('#carouselExampleAutoplaying .carousel-inner');
+  const cardsContainer = document.getElementById('cards-container');
+
+  try {
+    const gallery = await apiGetAll();
+
+    if (carouselContainer) {
+      carouselContainer.innerHTML = '';
+      gallery.forEach((item, index) => {
+        const activeClass = index === 0 ? 'active' : '';
+        const carouselItem = `
+          <div class="carousel-item detalhescarousel ${activeClass}">
+            <a href="detalhes.html?id=${item.id}">
+              <img src="${item.imagem}" class="d-block w-100" alt="${item.titulo}" style="height:80vh; object-fit:cover;">
+            </a>
           </div>
-        </a>
-      </div>
-    `;
-    cardsContainer.insertAdjacentHTML('beforeend', card);
-  });
+        `;
+        carouselContainer.insertAdjacentHTML('beforeend', carouselItem);
+      });
+    }
+
+    if (cardsContainer) {
+      cardsContainer.innerHTML = '';
+      gallery.forEach(item => {
+        const card = `
+          <div class="col-md-4 mb-4">
+            <a href="detalhes.html?id=${item.id}" class="text-decoration-none">
+              <div class="card h-500 bg-transparent border-light text-white">
+                <img src="${item.imagem}" class="card-img-top" alt="${item.titulo}" style="object-fit: cover; height:500px;">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title itenstitle">${item.titulo}</h5>
+                  <p class="card-text">${item.descricao}</p>
+                  <p class="mt-auto fw-bold">R$ ${Number(item.price).toFixed(2)}</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        `;
+        cardsContainer.insertAdjacentHTML('beforeend', card);
+      });
+    }
+
+  } catch (err) {
+    console.error(err);
+    if (cardsContainer) cardsContainer.innerHTML = `<p class="text-danger">Erro carregando dados: ${err.message}</p>`;
+  }
 }
 
-const itemDetalhes = document.getElementById('item-detalhes');
+async function renderDetalhes() {
+  const itemDetalhes = document.getElementById('item-detalhes');
+  if (!itemDetalhes) return;
 
-if (itemDetalhes) {
   const urlParams = new URLSearchParams(window.location.search);
   const itemId = parseInt(urlParams.get('id'));
-  const item = gallery.find(i => i.id === itemId);
+  if (!itemId) {
+    itemDetalhes.innerHTML = '<p class="text-danger text-center">ID inválido</p>';
+    return;
+  }
 
-  if (item) {
+  try {
+    const item = await apiGetById(itemId);
+
     itemDetalhes.innerHTML = `
       <div class="col-12 mb-3">
         <div class="item-image" style="
@@ -162,48 +121,126 @@ if (itemDetalhes) {
         <p><strong>Categoria:</strong> ${item.categoria}</p>
         <p><strong>Autor:</strong> ${item.autor}</p>
         <p><strong>Data:</strong> ${item.data}</p>
-        <p><strong>Preço:</strong> R$ ${item.price.toFixed(2)}</p>
+        <p><strong>Preço:</strong> R$ ${Number(item.price).toFixed(2)}</p>
+        <div class="mt-3 d-flex gap-2">
+          <button id="btn-edit" class="btn btn-warning">Editar</button>
+          <button id="btn-delete" class="btn btn-danger">Excluir</button>
+        </div>
       </div>
-    `;
-  } else {
-    itemDetalhes.innerHTML = '<p class="text-danger text-center">Item não encontrado!</p>';
-  }
-}
 
-
-
-const fotosCarouselInner = document.getElementById('fotos-carousel-inner');
-if(fotosCarouselInner){
-  const cardsPerSlide = 3;
-  for(let i = 0; i < gallery.length; i += cardsPerSlide){
-    const slice = gallery.slice(i, i + cardsPerSlide);
-    const activeClass = i === 0 ? 'active' : '';
-    
-    let slideCards = '';
-    slice.forEach(item => {
-      slideCards += `
-        <div class="col">
-          <a href="detalhes.html?id=${item.id}" class="text-decoration-none text-white">
-            <div class="card bg-dark border-light text-white" style="width: 18rem; margin: 0 5px;">
-              <img src="${item.imagem}" class="card-img-top" alt="${item.titulo}" style="height:180px; object-fit:cover;">
-              <div class="card-body text-center">
-                <h6 class="card-title mb-0">${item.titulo}</h6>
-              </div>
+      <!-- Formulário de edição -->
+      <section id="editar-item" class="py-5 d-none">
+        <div class="container">
+          <h3 class="text-center mb-4">Editar Item</h3>
+          <form id="form-update" class="mx-auto" style="max-width: 600px;">
+            <div class="mb-3"><label class="form-label">Título</label>
+              <input type="text" class="form-control" name="titulo" required />
             </div>
-          </a>
+            <div class="mb-3"><label class="form-label">Descrição</label>
+              <input type="text" class="form-control" name="descricao" required />
+            </div>
+            <div class="mb-3"><label class="form-label">Conteúdo</label>
+              <textarea class="form-control" name="conteudo" rows="3" required></textarea>
+            </div>
+            <div class="mb-3"><label class="form-label">Categoria</label>
+              <input type="text" class="form-control" name="categoria" required />
+            </div>
+            <div class="mb-3"><label class="form-label">Autor</label>
+              <input type="text" class="form-control" name="autor" required />
+            </div>
+            <div class="mb-3"><label class="form-label">Data</label>
+              <input type="date" class="form-control" name="data" required />
+            </div>
+            <div class="mb-3"><label class="form-label">Imagem (URL)</label>
+              <input type="url" class="form-control" name="imagem" required />
+            </div>
+            <div class="mb-3"><label class="form-label">Preço</label>
+              <input type="number" step="0.01" class="form-control" name="price" required />
+            </div>
+            <button type="submit" class="btn btn-success w-100">Salvar Alterações</button>
+          </form>
         </div>
-      `;
-    });
-
-    const carouselItem = `
-      <div class="carousel-item ${activeClass}">
-        <div class="row justify-content-center">
-          ${slideCards}
-        </div>
-      </div>
+      </section>
     `;
-    fotosCarouselInner.insertAdjacentHTML('beforeend', carouselItem);
+
+    const btnDelete = document.getElementById('btn-delete');
+    if (btnDelete) {
+      btnDelete.addEventListener('click', async () => {
+        if (!confirm('Confirma exclusão deste item?')) return;
+        try {
+          await apiDelete(itemId);
+          alert('Item excluído com sucesso!');
+          window.location.href = 'index.html';
+        } catch (err) {
+          alert('Erro ao excluir: ' + err.message);
+        }
+      });
+    }
+
+    const btnEdit = document.getElementById('btn-edit');
+    const sectionEdit = document.getElementById('editar-item');
+    const formUpdate = document.getElementById('form-update');
+
+    if (btnEdit && sectionEdit && formUpdate) {
+      btnEdit.addEventListener('click', () => {
+        sectionEdit.classList.remove('d-none');
+        formUpdate.titulo.value = item.titulo;
+        formUpdate.descricao.value = item.descricao;
+        formUpdate.conteudo.value = item.conteudo;
+        formUpdate.categoria.value = item.categoria;
+        formUpdate.autor.value = item.autor;
+        formUpdate.data.value = item.data;
+        formUpdate.imagem.value = item.imagem;
+        formUpdate.price.value = item.price;
+        formUpdate.dataset.id = item.id;
+      });
+
+      formUpdate.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const id = formUpdate.dataset.id;
+        const formData = new FormData(formUpdate);
+        const obj = Object.fromEntries(formData.entries());
+        if (obj.price) obj.price = Number(obj.price);
+        try {
+          await apiUpdate(id, obj);
+          alert('Item atualizado com sucesso!');
+          window.location.reload();
+        } catch (err) {
+          alert('Erro ao atualizar: ' + err.message);
+        }
+      });
+    }
+
+  } catch (err) {
+    console.error(err);
+    itemDetalhes.innerHTML = `<p class="text-danger text-center">Erro: ${err.message}</p>`;
   }
 }
 
 
+async function handleCreateForm(formElement) {
+  const form = new FormData(formElement);
+  const obj = Object.fromEntries(form.entries());
+  if (obj.price) obj.price = Number(obj.price);
+  try {
+    await apiCreate(obj);
+    alert('Criado com sucesso!');
+    window.location.href = 'index.html';
+  } catch (err) {
+    alert('Erro ao criar: ' + err.message);
+  }
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.getElementById('cards-container')) renderHome();
+  if (document.getElementById('item-detalhes')) renderDetalhes();
+
+  const formCreate = document.getElementById('form-create');
+  if (formCreate) {
+    formCreate.addEventListener('submit', (e) => {
+      e.preventDefault();
+      handleCreateForm(formCreate);
+    });
+  }
+});
