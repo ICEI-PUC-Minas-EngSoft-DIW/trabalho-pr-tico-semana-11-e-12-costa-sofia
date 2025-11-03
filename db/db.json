@@ -87,6 +87,33 @@
       "data": "2025-11-02",
       "imagem": "https://cdn.leonardo.ai/.../grafite_japones_0.jpg",
       "price": 250
+    },
+    {
+      "id": "1a3a",
+      "titulo": "Grafite Japonês Atualizado",
+      "autor": "Leonardo AI",
+      "descricao": "Versão revisada do grafite japonês.",
+      "categoria": "Arte de Rua",
+      "imagem": "https://cdn.leonardo.ai/.../grafite_japones_atualizado.jpg",
+      "price": 260
+    },
+    {
+      "id": "9ebc",
+      "titulo": "Grafite Japonês Atualizado",
+      "autor": "Leonardo AI",
+      "descricao": "Tetse",
+      "categoria": "Arte de Rua",
+      "imagem": "Tetse",
+      "price": 300
+    },
+    {
+      "id": "199a",
+      "titulo": "Teste",
+      "autor": "Leonardo AI",
+      "descricao": "Teste",
+      "categoria": "Arte de Rua",
+      "imagem": "Tetse",
+      "price": 200
     }
   ]
 }
